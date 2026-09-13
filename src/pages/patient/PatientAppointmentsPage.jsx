@@ -14,7 +14,7 @@ const PatientAppointmentsPage = () => {
     queryKey: ['appointments', 'patient-list'],
     queryFn: async () => {
       const res = await appointmentApi.getAll();
-      return res.data?.data?.appointments || [];
+      return Array.isArray(res.data?.data) ? res.data.data : (res.data?.data?.appointments || []);
     },
   });
 

@@ -2,10 +2,15 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import useAuthStore from '../store/authStore.js';
 
+const defaultBaseUrl = 
+  typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? 'http://localhost:8000/api/v1'
+    : 'https://ai-hackathon-task-backend.vercel.app/api/v1';
+
 const instance = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api/v1',
+  baseURL: import.meta.env.VITE_API_BASE_URL || defaultBaseUrl,
   withCredentials: true,
-  timeout: 15000,
+  timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
     'X-Client-Version': '1.0.0',

@@ -7,7 +7,7 @@ export const usePatient = (id) => {
     queryFn: async () => {
       if (!id) return null;
       const res = await patientApi.getById(id);
-      return res.data?.data?.patient || null;
+      return res.data?.data?.patient || res.data?.data || null;
     },
     enabled: !!id,
     staleTime: 1000 * 60 * 5,

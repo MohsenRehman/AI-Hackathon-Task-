@@ -8,7 +8,7 @@ export const useUpdateAppointmentStatus = (filters = {}) => {
   return useMutation({
     mutationFn: async ({ id, status }) => {
       const res = await appointmentApi.updateStatus(id, status);
-      return res.data?.data?.appointment;
+      return res.data?.data?.appointment || res.data?.data;
     },
     // Optimistic Update Hook
     onMutate: async ({ id, status }) => {

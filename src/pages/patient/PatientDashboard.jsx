@@ -35,7 +35,7 @@ const PatientDashboard = () => {
     queryKey: ['appointments', 'patient-dashboard'],
     queryFn: async () => {
       const res = await appointmentApi.getAll();
-      return res.data?.data?.appointments || [];
+      return Array.isArray(res.data?.data) ? res.data.data : (res.data?.data?.appointments || []);
     },
   });
 
@@ -44,7 +44,7 @@ const PatientDashboard = () => {
     queryKey: ['prescriptions', 'patient-dashboard'],
     queryFn: async () => {
       const res = await prescriptionApi.getAll();
-      return res.data?.data?.prescriptions || [];
+      return Array.isArray(res.data?.data) ? res.data.data : (res.data?.data?.prescriptions || []);
     },
   });
 

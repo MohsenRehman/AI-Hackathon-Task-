@@ -24,7 +24,7 @@ const PatientPrescriptionsPage = () => {
     queryKey: ['prescriptions', 'patient-list'],
     queryFn: async () => {
       const res = await prescriptionApi.getAll();
-      return res.data?.data?.prescriptions || [];
+      return Array.isArray(res.data?.data) ? res.data.data : (res.data?.data?.prescriptions || []);
     },
   });
 

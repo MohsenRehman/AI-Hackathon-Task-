@@ -8,7 +8,7 @@ export const useBookAppointment = () => {
   return useMutation({
     mutationFn: async (appointmentData) => {
       const res = await appointmentApi.create(appointmentData);
-      return res.data?.data?.appointment;
+      return res.data?.data?.appointment || res.data?.data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: appointmentKeys.all });

@@ -8,7 +8,7 @@ export const useCreatePatient = () => {
   return useMutation({
     mutationFn: async (patientData) => {
       const res = await patientApi.create(patientData);
-      return res.data?.data?.patient;
+      return res.data?.data?.patient || res.data?.data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: patientKeys.all });
