@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { prescriptionApi, prescriptionKeys } from '../../../api/prescription.api.js';
 
+import { API_BASE_URL } from '../../../api/axios.instance.js';
 import useAuthStore from '../../../store/authStore.js';
 
 export const useCreatePrescription = () => {
@@ -19,7 +20,7 @@ export const useCreatePrescription = () => {
       // Auto open PDF if returned in response
       if (data?.pdfUrl) {
         const token = useAuthStore.getState().accessToken;
-        const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api/v1';
+        const baseURL = API_BASE_URL;
         const url = data.pdfUrl.startsWith('/')
           ? `${baseURL}${data.pdfUrl}`
           : data.pdfUrl;

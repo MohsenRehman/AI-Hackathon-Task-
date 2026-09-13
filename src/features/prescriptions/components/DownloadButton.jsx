@@ -9,6 +9,7 @@ import Modal from '../../../components/ui/Modal.jsx';
 import UpgradePrompt from '../../../components/shared/UpgradePrompt.jsx';
 
 import useAuthStore from '../../../store/authStore.js';
+import { API_BASE_URL } from '../../../api/axios.instance.js';
 
 const DownloadButton = ({ prescriptionId }) => {
   const { isFeatureEnabled } = usePlan();
@@ -27,7 +28,7 @@ const DownloadButton = ({ prescriptionId }) => {
     try {
       // Trigger the download redirect
       const token = useAuthStore.getState().accessToken;
-      const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api/v1';
+      const baseURL = API_BASE_URL;
       window.open(`${baseURL}/prescriptions/${prescriptionId}/download?token=${token}`, '_blank');
       toast.success('Opening prescription PDF...');
     } catch (error) {
